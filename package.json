@@ -1,0 +1,12 @@
+{
+  "name": "caam-beauty-bot",
+  "version": "1.0.0",
+  "description": "CAAM Beauty automated response bot for Facebook and Instagram",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
