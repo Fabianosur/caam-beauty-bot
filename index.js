@@ -34,7 +34,7 @@ app.get('/webhook',(req,res)=>{
 
 app.post('/webhook',async(req,res)=>{
   res.sendStatus(200);
-  const body=req.body;
+  const body=req.body;console.log('WEBHOOK:',JSON.stringify(body).substring(0,200));
   if(body.object!=='page'&&body.object!=='instagram') return;
   const isIG = body.object==='instagram';
   const token = isIG ? INSTAGRAM_ACCESS_TOKEN : PAGE_ACCESS_TOKEN;
