@@ -34,7 +34,7 @@ app.get('/webhook',(req,res)=>{
 app.post('/webhook',async(req,res)=>{
   res.sendStatus(200);
   const body=req.body;
-  if(body.object!=='page') return;
+  if(body.object!=='page'&&body.object!=='instagram') return;
   for(const entry of body.entry){
     for(const event of (entry.messaging||[])){
       if(event.message&&event.message.text){
