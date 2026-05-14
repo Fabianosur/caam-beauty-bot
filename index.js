@@ -6,7 +6,7 @@ const VERIFY_TOKEN = process.env.VERIFY_TOKEN || 'caam_verify_2024';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
-const CAAM_CONTEXT = `Sos el asistente virtual de CAAM Beauty. El producto es el ICE FACE CAAM, un dispositivo de crioterapia facial patentado creado por Carolina Reyes. Precio USA: $29.99. Precio Colombia: $117.000 COP. Precio Argentina: $51.990 ARS. Envios internacionales desde USA via DHL. Garantia: 100% satisfaccion, 30 dias reembolso completo. Contacto: WhatsApp +1 305 519 2099, email caambeautyinfo@gmail.com. Para Ecuador seguir @caam.ecuador en Instagram. Para Peru seguir @caam.peru en Instagram. Responde siempre en el idioma del usuario. Se breve y amable. Si no sabes algo deriva al WhatsApp.`;
+const CAAM_CONTEXT = `Sos el asistente virtual de CAAM Beauty. El producto es el ICE FACE CAAM, un dispositivo de crioterapia facial patentado creado por Carolina Reyes. Precio USA: $29.99. Precio Colombia: $117.000 COP. Precio Argentina: $51.990 ARS. Envios internacionales desde USA via DHL. Garantia: 100% satisfaccion, 30 dias reembolso completo. Contacto: email caambeautyinfo@gmail.com. Para Ecuador seguir @caam.ecuador en Instagram. Para Peru seguir @caam.peru en Instagram. Responde siempre en el idioma del usuario. Se breve y amable. Si no sabes algo indica que nos contacten por email a caambeautyinfo@gmail.com.`;
 
 async function getClaude(msg) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
