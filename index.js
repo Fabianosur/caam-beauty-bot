@@ -50,4 +50,53 @@ async function getClaude(msg) {
     })
   });
   const d = await r.json();
-  if (!d.content ||
+  if (!d.content || !d.content[0]) throw new Error('No content: ' + JSON.stringify(d));
+  return d.content[0].text;
+}
+
+async function sendMsg(id, text, token) {
+  const r = await fetch(`https://graph.facebook.com/v18.0/me/messages?access_token=${token}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ recipient: { id }, message: { text } })
+  });
+  const d = await r.json();
+  console.log('SEND RESULT:', JSON.stringify(d));
+}
+
+app.get('/webhook', (req, res) => {
+  if (req.query['hub.verify_token'] === VERIFY_TOKEN) {
+    res.send(req.query['hub.challenge']);
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+app.post('/webhook', async (req, res) => {
+  const body = req.body;
+  res.sendStatus(200);
+  if (body.object !== 'page' && body.object !== 'instagram') return;
+  const isIG = body.object === 'instagram';
+  const token = isIG ? INSTAGRAM_ACCESS_TOKEN : PAGE_ACCESS_TOKEN;
+  for (const entry of body.entry || []) {
+    for (const event of entry.messaging || []) {
+      if (!event.message || !event.message.text) continue;
+      try {
+        const userId = event.sender.id;
+        let reply;
+        if (!greetedUsers.has(userId)) {
+          greetedUsers.add(userId);
+          reply = "Hola! Ya tenes tu ICE FACE CAAM? Si todavia no lo tenes, conseguilo aqui: https://caambeauty.com/products/ice-face-caam";
+        } else {
+          reply = await getClaude(event.message.text);
+        }
+        await sendMsg(userId, reply, token);
+      } catch (e) {
+        console.error('ERROR:', e.message);
+      }
+    }
+  }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log('Bot running on port ' + PORT));
