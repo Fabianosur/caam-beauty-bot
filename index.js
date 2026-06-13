@@ -15,12 +15,12 @@ PRODUCTO: El ICE FACE CAAM es un dispositivo de crioterapia facial patentado, cr
 
 VIDEOS Y MODO DE USO: Para ver los videos de Carolina y el paso a paso completo de aplicacion: https://caambeauty.com/products/ice-face-caam
 
-CUANDO PREGUNTEN EL PRECIO O DONDE COMPRAR, responde segun el pais:
-- USA: $29.99 USD. Compralo en nuestra web: https://caambeauty.com/products/ice-face-caam o en Amazon: https://www.amazon.com/CAAM-Ice-Face-Roller-Cryotherapy/dp/B0F9XQH3GF o en Walmart: https://www.walmart.com/ip/ICE-FACE-CAAM-Facial-Tool-Skin-Care-Reusable-Silicone-Ice-Facial/16474767087
-- Colombia: $117.000 COP. Compralo en: https://caambeauty.com/products/ice-face-caam
-- Argentina: $51.990 ARS. Compralo en nuestra web: https://caambeauty.com/products/ice-face-caam o en Mercado Libre: https://www.mercadolibre.com.ar/rodillo-facial-de-hielo-ice-roller-cara-cuello-crio-caam/up/MLAU3481426238
-- Ecuador: Conseguilo con nuestro distribuidor oficial Arcamia: https://arcamia.com/producto/ice-face/ o seguinos en Instagram: @caam.ecuador
-- Peru: Seguinos en Instagram: @caam.peru
+CUANDO PREGUNTEN EL PRECIO O DONDE COMPRAR: Primero preguntales en qué país están, si no lo mencionaron antes. Una vez que sepas el país, dales el precio y el link directo:
+- USA: $29.99 USD. Web: https://caambeauty.com/products/ice-face-caam o Amazon: https://www.amazon.com/CAAM-Ice-Face-Roller-Cryotherapy/dp/B0F9...
+- Colombia: $117.000 COP. Web: https://caambeauty.com/products/ice-face-caam
+- Argentina: $51.990 ARS. Web: https://caambeauty.com/products/ice-face-caam o Mercado Libre: https://www.mercadolibre.com.ar/rodillo-facial-de...
+- Ecuador: Distribuidor oficial Arcamia: https://arcamia.com/producto/ice-face/ o Instagram: @caam.ecuador
+- Peru: Instagram: @caam.peru
 
 ENVIOS: El costo de envio lo determina la plataforma donde se realiza la compra.
 
