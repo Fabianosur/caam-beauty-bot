@@ -9,21 +9,23 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 const userContexts = {};
 
-const CAAM_CONTEXT = `Eres el asistente de ventas de CAAM Beauty. Tu nombre es CAAM Assistant. Tu objetivo es ayudar al usuario y guiarlo hacia la compra del ICE FACE CAAM.
+const CAAM_CONTEXT = `Eres el asistente de ventas de CAAM Beauty. Tu objetivo es ayudar al usuario y guiarlo hacia la compra del ICE FACE CAAM.
 
 PRODUCTO: El ICE FACE CAAM es un dispositivo de crioterapia facial patentado, creado por Carolina Reyes. Reafirma la piel, reduce la inflamacion y mejora la circulacion en minutos. Tecnologia patentada, sin quemar, sin mojar, sin residuos. Material: silicona de grado alimentario, reutilizable.
 
 VIDEOS Y MODO DE USO: Para ver los videos de Carolina y el paso a paso completo: https://caambeauty.com/products/ice-face-caam
 
-CUANDO PREGUNTEN EL PRECIO O DONDE COMPRAR:
-Si el usuario NO menciono su pais, preguntale primero: "Con gusto! En que pais estas?"
-Una vez que sepas el pais, dales el precio y el link directo:
-- USA: $29.99 USD. Web: https://caambeauty.com/products/ice-face-caam | Amazon: https://www.amazon.com/CAAM-BEAUTY-CAROLINA-REYES-Reusable/dp/B0F9XQH3GF
-- Colombia: $117.000 COP. Web: https://caambeauty.com/products/ice-face-caam
-- Argentina: $51.990 ARS. Web: https://caambeauty.com/products/ice-face-caam | Mercado Libre: https://www.mercadolibre.com.ar/rodillo-facial-de-hielo-ice-roller-cara-cuello-crio-caam/up/MLAU3481426238
-- Ecuador: Distribuidor oficial Arcamia: https://arcamia.com/producto/ice-face/ o seguinos en Instagram: @caam.ecuador
-- Peru: Seguinos en Instagram: @caam.peru
-- Otro pais: Por ahora solo enviamos desde USA via https://caambeauty.com/products/ice-face-caam — el envio internacional lo gestiona la plataforma.
+CUANDO PREGUNTEN EL PRECIO O DONDE COMPRAR: Responde SIEMPRE con todos los precios y opciones en un solo mensaje, sin preguntar el pais primero:
+
+El ICE FACE CAAM esta disponible segun tu pais:
+🇺🇸 USA: $29.99 USD — Web: https://caambeauty.com/products/ice-face-caam | Amazon: https://www.amazon.com/CAAM-BEAUTY-CAROLINA-REYES-Reusable/dp/B0F9XQH3GF
+🇨🇴 Colombia: $117.000 COP — Web: https://caambeauty.com/products/ice-face-caam | Farmatodo
+🇦🇷 Argentina: $51.990 ARS — Web: https://caambeauty.com/products/ice-face-caam | Mercado Libre: https://www.mercadolibre.com.ar/rodillo-facial-de-hielo-ice-roller-cara-cuello-crio-caam/up/MLAU3481426238
+🇪🇨 Ecuador: Distribuidor oficial Arcamia: https://arcamia.com/producto/ice-face/ | Instagram: @caam.ecuador
+🇵🇪 Peru: Instagram: @caam.peru
+🌍 Otro pais: Compra desde nuestra web con envio internacional: https://caambeauty.com/products/ice-face-caam
+
+Elegis tu pais en la web y te muestra el precio y envio exacto.
 
 ENVIOS: El costo de envio lo determina la plataforma donde se realiza la compra.
 
@@ -41,7 +43,7 @@ REGLAS IMPORTANTES:
 - Nunca menciones WhatsApp.
 - Nunca saludes ni digas Hola al inicio de cada respuesta — el saludo ya fue dado. Ve directo al punto.
 - Responde siempre en el idioma del usuario.
-- Se breve, directo y amable. Maximo 3-4 oraciones por respuesta.
+- Se breve, directo y amable.
 - Siempre incluye links con https:// cuando sean relevantes.
 - Nunca inventes informacion. Si no sabes algo, deriva a caambeautyinfo@gmail.com.
 - Usa emojis con moderacion para sonar humano y cercano.`;
@@ -103,7 +105,7 @@ app.post('/webhook', async (req, res) => {
         const userId = event.sender.id;
         let reply;
         if (!userContexts[userId]) {
-          reply = "Hola! Soy el asistente de CAAM Beauty. Te puedo ayudar con info sobre el ICE FACE CAAM, precios y donde comprarlo. En que te puedo ayudar?";
+          reply = "Hola! 👋 Soy el asistente de CAAM Beauty. Te puedo ayudar con info sobre el ICE FACE CAAM, precios y donde comprarlo. En que te puedo ayudar?";
           userContexts[userId] = [];
         } else {
           reply = await getClaude(userId, event.message.text);
