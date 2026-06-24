@@ -9,6 +9,8 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 const greetedUsers = new Set();
 
+const PITCH = `Cada dia que pospones el cuidado de tu piel, el tiempo sigue avanzando. La inflamacion esta relacionada con el envejecimiento, y CAAM esta disenado para ayudarte a desinflamar mientras revitalizas tu rostro con el poder del frio. No esperes a que los signos sean mas visibles.`;
+
 const WELCOME_MSG = `Hola! Ya tenes tu ICE FACE CAAM?
 
 Conseguilo aqui:
@@ -31,7 +33,9 @@ Mercado Libre: https://www.mercadolibre.com.ar/rodillo-facial-de-hielo-ice-rolle
 
 Otro pais: caambeautyinfo@gmail.com
 
-Tenes alguna pregunta sobre el producto?`;
+${PITCH}
+
+Tenes alguna otra pregunta?`;
 
 const CAAM_CONTEXT = `Eres el asistente de ventas de CAAM Beauty. Responde siempre directo, sin vueltas, en el idioma del usuario.
 
@@ -67,17 +71,22 @@ Mercado Libre: https://www.mercadolibre.com.ar/rodillo-facial-de-hielo-ice-rolle
 
 Otro pais: caambeautyinfo@gmail.com
 
+Cada dia que pospones el cuidado de tu piel, el tiempo sigue avanzando. La inflamacion esta relacionada con el envejecimiento, y CAAM esta disenado para ayudarte a desinflamar mientras revitalizas tu rostro con el poder del frio. No esperes a que los signos sean mas visibles.
+
 Tenes alguna otra pregunta?"
 
 CUANDO PREGUNTEN COMO SE USA, PARA QUE SIRVE, BENEFICIOS O TIPO DE PIEL:
 
 El ICE FACE CAAM es un dispositivo de crioterapia facial patentado, creado por Carolina Reyes. Reafirma la piel, reduce la inflamacion y mejora la circulacion. Sin quemar, sin mojar, sin residuos. Apto para todo tipo de piel. Duracion recomendada: 15-20 minutos.
 
+Cada dia que pospones el cuidado de tu piel, el tiempo sigue avanzando. La inflamacion esta relacionada con el envejecimiento, y CAAM esta disenado para ayudarte a desinflamar mientras revitalizas tu rostro con el poder del frio. No esperes a que los signos sean mas visibles.
+
 Modo de uso:
 1. Llena con agua y congela minimo 2 horas.
 2. Movimientos ascendentes desde el menton hacia mejillas y frente.
 3. Cuello: movimientos de abajo hacia arriba.
 4. Ojos: movimientos suaves y circulares.
+5. Duracion: 15-20 minutos para ver resultados.
 
 Ve los videos de Carolina y compra aqui: https://caambeauty.com/products/ice-face-caam
 
