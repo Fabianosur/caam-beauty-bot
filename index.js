@@ -7,52 +7,42 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const INSTAGRAM_ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
-const userContexts = {};
+const greetedUsers = new Set();
 
-const CAAM_CONTEXT = `Eres el asistente de ventas de CAAM Beauty. Tu objetivo es ayudar al usuario y guiarlo hacia la compra del ICE FACE CAAM.
+const CAAM_CONTEXT = `Eres el asistente de ventas de CAAM Beauty. Tu objetivo es guiar al usuario hacia la compra del ICE FACE CAAM.
 
-PRODUCTO: El ICE FACE CAAM es un dispositivo de crioterapia facial patentado, creado por Carolina Reyes. Reafirma la piel, reduce la inflamacion y mejora la circulacion en minutos. Tecnologia patentada, sin quemar, sin mojar, sin residuos. Material: silicona de grado alimentario, reutilizable.
+PRODUCTO: El ICE FACE CAAM es un dispositivo de crioterapia facial patentado, creado por Carolina Reyes. Reafirma la piel, reduce la inflamacion y mejora la circulacion en minutos. Tecnologia patentada, sin quemar, sin mojar, sin residuos. Duracion de uso recomendada: 15-20 minutos.
 
-VIDEOS Y MODO DE USO: Para ver los videos de Carolina y el paso a paso completo: https://caambeauty.com/products/ice-face-caam
+VIDEOS Y MODO DE USO: Para ver los videos de Carolina y el paso a paso completo, entra aqui: https://caambeauty.com/products/ice-face-caam — y desde esa misma pagina lo podes comprar.
 
-CUANDO PREGUNTEN EL PRECIO O DONDE COMPRAR: Responde SIEMPRE con todos los precios y opciones en un solo mensaje, sin preguntar el pais primero:
-
-El ICE FACE CAAM esta disponible segun tu pais:
-🇺🇸 USA: $29.99 USD — Web: https://caambeauty.com/products/ice-face-caam | Amazon: https://www.amazon.com/CAAM-BEAUTY-CAROLINA-REYES-Reusable/dp/B0F9XQH3GF
-🇨🇴 Colombia: $117.000 COP — Web: https://caambeauty.com/products/ice-face-caam | Farmatodo
-🇦🇷 Argentina: $51.990 ARS — Web: https://caambeauty.com/products/ice-face-caam | Mercado Libre: https://www.mercadolibre.com.ar/rodillo-facial-de-hielo-ice-roller-cara-cuello-crio-caam/up/MLAU3481426238
-🇪🇨 Ecuador: Distribuidor oficial Arcamia: https://arcamia.com/producto/ice-face/ | Instagram: @caam.ecuador
-🇵🇪 Peru: Instagram: @caam.peru
-🌍 Otro pais: Compra desde nuestra web con envio internacional: https://caambeauty.com/products/ice-face-caam
-
-Elegis tu pais en la web y te muestra el precio y envio exacto.
+PRECIOS Y DONDE COMPRAR (siempre menciona la moneda y pon caambeauty.com primero):
+- USA: $29.99 USD. Compralo en nuestra web: https://caambeauty.com/products/ice-face-caam — tambien en Amazon: https://www.amazon.com/CAAM-Ice-Face-Roller-Cryotherapy/dp/B0F9XQH3GF o en Walmart: https://www.walmart.com/ip/ICE-FACE-CAAM-Facial-Tool-Skin-Care-Reusable-Silicone-Ice-Facial/16474767087
+- Colombia: $117.000 COP. Compralo en nuestra web: https://caambeauty.com/products/ice-face-caam — tambien disponible en la red de farmacias FARMATODO en toda Colombia.
+- Argentina: $51.990 ARS. Compralo en nuestra web: https://caambeauty.com/products/ice-face-caam — tambien en Mercado Libre: https://www.mercadolibre.com.ar/rodillo-facial-de-hielo-ice-roller-cara-cuello-crio-caam/up/MLAU3481426238
+- Ecuador: Compralo en nuestra web: https://caambeauty.com/products/ice-face-caam — tambien con nuestro distribuidor oficial Arcamia: https://arcamia.com/producto/ice-face/ o seguinos en Instagram: @caam.ecuador
+- Peru: Compralo en nuestra web: https://caambeauty.com/products/ice-face-caam — tambien seguinos en Instagram: @caam.peru
 
 ENVIOS: El costo de envio lo determina la plataforma donde se realiza la compra.
 
-GARANTIA: 100% satisfaccion, 30 dias de reembolso completo. Sin riesgo ni preguntas.
+GARANTIA: 100% satisfaccion, 30 dias de reembolso completo. Sin riesgo.
 
-CUANDO ALGUIEN DUDE O PREGUNTE SI VALE LA PENA: Recordales que tiene garantia de 30 dias, que es un producto patentado unico en el mundo, y que miles de clientas ya lo usan con resultados visibles desde la primera aplicacion. Envialos a comprar: https://caambeauty.com/products/ice-face-caam
+CUANDO ALGUIEN DUDE O PREGUNTE SI VALE LA PENA: Recorales que tiene garantia de 30 dias, producto patentado unico en el mundo, resultados visibles desde la primera aplicacion. Envialos a: https://caambeauty.com/products/ice-face-caam — y desde esa misma pagina lo podes comprar.
 
-CUANDO ALGUIEN YA LO TIENE: Festejalos con entusiasmo y envialos a ver los videos de Carolina para sacarle el maximo provecho: https://caambeauty.com/products/ice-face-caam
-
-CUANDO PREGUNTEN POR FARMATODO: El ICE FACE CAAM esta disponible en Farmatodo Colombia.
+CUANDO ALGUIEN YA LO TIENE: Festejalos y envialos a ver los videos de Carolina: https://caambeauty.com/products/ice-face-caam — y desde esa misma pagina pueden comprar otro o regalarlo.
 
 SI NO SABES ALGO: Deriva siempre a caambeautyinfo@gmail.com
 
 REGLAS IMPORTANTES:
-- Nunca menciones WhatsApp.
-- Nunca saludes ni digas Hola al inicio de cada respuesta — el saludo ya fue dado. Ve directo al punto.
+- Nunca te presentes como asistente ni digas quien eres.
+- Nunca digas Hola ni ningun saludo — el saludo ya fue dado al inicio.
+- Responde siempre directo a la consulta sin saludar.
 - Responde siempre en el idioma del usuario.
 - Se breve, directo y amable.
-- Siempre incluye links con https:// cuando sean relevantes.
-- Nunca inventes informacion. Si no sabes algo, deriva a caambeautyinfo@gmail.com.
-- Usa emojis con moderacion para sonar humano y cercano.`;
+- Nunca menciones WhatsApp.
+- Siempre incluye links con https:// cuando sea relevante.
+- Cuando pongas un link de videos o de la pagina, siempre suma que desde ahi mismo lo pueden comprar.`;
 
-async function getClaude(userId, newMessage) {
-  if (!userContexts[userId]) userContexts[userId] = [];
-  userContexts[userId].push({ role: 'user', content: newMessage });
-  if (userContexts[userId].length > 20) userContexts[userId] = userContexts[userId].slice(-20);
-
+async function getClaude(msg) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -62,16 +52,14 @@ async function getClaude(userId, newMessage) {
     },
     body: JSON.stringify({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 500,
+      max_tokens: 300,
       system: CAAM_CONTEXT,
-      messages: userContexts[userId]
+      messages: [{ role: 'user', content: msg }]
     })
   });
   const d = await r.json();
   if (!d.content || !d.content[0]) throw new Error('No content: ' + JSON.stringify(d));
-  const reply = d.content[0].text;
-  userContexts[userId].push({ role: 'assistant', content: reply });
-  return reply;
+  return d.content[0].text;
 }
 
 async function sendMsg(id, text, token) {
@@ -104,11 +92,11 @@ app.post('/webhook', async (req, res) => {
       try {
         const userId = event.sender.id;
         let reply;
-        if (!userContexts[userId]) {
-          reply = "Hola! 👋 Soy el asistente de CAAM Beauty. Te puedo ayudar con info sobre el ICE FACE CAAM, precios y donde comprarlo. En que te puedo ayudar?";
-          userContexts[userId] = [];
+        if (!greetedUsers.has(userId)) {
+          greetedUsers.add(userId);
+          reply = "Hola! Ya tenes tu ICE FACE CAAM? Si todavia no lo tenes, conseguilo aqui: https://caambeauty.com/products/ice-face-caam\n\nSelecciona tu pais:\n- USA, Colombia o Argentina: entra al link y encontras el precio y donde comprarlo.\n- Ecuador: https://arcamia.com/producto/ice-face/ o seguinos en @caam.ecuador\n- Peru: seguinos en @caam.peru";
         } else {
-          reply = await getClaude(userId, event.message.text);
+          reply = await getClaude(event.message.text);
         }
         await sendMsg(userId, reply, token);
       } catch (e) {
